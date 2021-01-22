@@ -7,7 +7,9 @@ set output_list[0]=
 set /a index=1
 for /f "tokens=* delims=1" %%i in ('powercfg /list') do (set line=%%i && if not "!line:GUID=!"=="!line!" (set output_list[!index!]=%%i && set /a index += 1))
 set /a index=1
-for /f "tokens=2 delims==" %%s in ('set output_list[') do (echo !index!: %%s && set /a index += 1)
+echo List of Power Options
+echo ---------------------
+for /f "tokens=2 delims=:" %%s in ('set output_list[') do (echo !index!:%%s && set /a index += 1)
 echo * ^=^> Active
 set /p select=Select Power Option: 
 if not defined output_list[%select%] (echo Wrong Input && pause && exit)
